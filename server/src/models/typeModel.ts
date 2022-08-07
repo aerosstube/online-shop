@@ -1,18 +1,17 @@
-
-//create type model with columns: id, name and hasMany: Device using sequelize-typescript
-
-import {Column, DataType, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
+import {BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table} from "sequelize-typescript";
 import Device from "./deviceModel";
+import Brand from "./brandModel";
+import TypeHasBrand from "./typeHasBrandModel";
 
-@Table({ tableName: 'type' })
+@Table({tableName: 'type'})
 export default class Type extends Model {
-    @PrimaryKey
-    @Column(DataType.INTEGER)
-    id: number | any;
-
     @Column(DataType.STRING)
-    name: string | any;
+    name: string | any
 
-    @HasMany(() => Device)
-    device: Device[] | any;
+    @HasOne(() => Device)
+    device: Device | any
+
+    @HasMany(() => TypeHasBrand)
+    typeHasBrands: TypeHasBrand[] | any
+
 }

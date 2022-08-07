@@ -2,23 +2,19 @@ import {
     Table,
     Model,
     Column,
-    BelongsTo,
-    ForeignKey,
     Default,
     Unique,
     AllowNull,
-    PrimaryKey, HasOne
+    HasOne, HasMany
 } from "sequelize-typescript";
 import {DataType} from "sequelize-typescript";
 import Token from "./tokenModel";
+import Basket from "./basketModel";
+import Rating from "./ratingModel";
+import Review from "./reviewModel";
 
 @Table({ tableName: 'user' })
 export default class User extends Model {
-
-    @PrimaryKey
-    @Column(DataType.INTEGER)
-    id: number | any
-
     @Unique(true)
     @Column(DataType.STRING)
     email: string | any
@@ -41,6 +37,15 @@ export default class User extends Model {
 
     @HasOne(() => Token)
     token: Token | any
+
+    @HasOne(() => Basket)
+    basket: Basket | any
+
+    @HasMany(() => Review)
+    reviews: Review[] | any
+
+    @HasMany(() => Rating)
+    ratings: Rating[] | any
 }
 
 

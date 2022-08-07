@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
+// @ts-ignore
 module.exports = new sequelize_typescript_1.Sequelize({
     database: process.env.DB_NAME,
     dialect: 'postgres',
@@ -8,5 +9,5 @@ module.exports = new sequelize_typescript_1.Sequelize({
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     models: [__dirname + '/models'],
-    port: 5432
+    port: process.env.DB_PORT
 });
