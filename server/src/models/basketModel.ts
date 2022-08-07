@@ -1,15 +1,15 @@
-import {BelongsTo, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
+import { BelongsTo, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import BasketItem from "./basketItemModel";
 import User from "./userModel";
-import BasketItem from "./basketItem";
 
 @Table({tableName: 'basket'})
 export default class Basket extends Model {
+    @HasMany(() => BasketItem)
+    basketItems!: BasketItem[]
+
     @BelongsTo(() => User)
-    user: User | any
+    user!: User
 
     @ForeignKey(() => User)
-    user_id: number | any
-
-    @HasMany(() => BasketItem)
-    basket_items: BasketItem[] | any
+    userId!: number
 }

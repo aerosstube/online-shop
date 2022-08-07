@@ -1,25 +1,21 @@
-import {AllowNull, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
-import Device from "./deviceModel";
+import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
 import User from "./userModel";
+import Device from "./deviceModel";
 
 @Table({tableName: 'rating'})
 export default class Rating extends Model {
-    @AllowNull(false)
-    @Column(DataType.INTEGER)
-    rating: number | any
-
-    @BelongsTo(() => Device)
-    device: Device | any
+    @Column(DataType.DOUBLE)
+    rating!: number
 
     @BelongsTo(() => User)
-    user: User | any
-
-    @ForeignKey(() => Device)
-    device_id: number | any
+    user!: User
 
     @ForeignKey(() => User)
-    user_id: number | any
+    userId!: number
 
-    @HasMany(() => Device)
-    devices: Device[] | any
+    @BelongsTo(() => Device)
+    device!: Device
+
+    @ForeignKey(() => Device)
+    deviceId!: number
 }

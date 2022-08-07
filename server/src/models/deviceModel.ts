@@ -1,46 +1,45 @@
-import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
-import Rating from "./ratingModel";
-import Review from "./reviewModel";
+import {AllowNull, BelongsTo, Column, DataType, Default, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
+import BasketItem from "./basketItemModel";
 import Type from "./typeModel";
-import BasketItem from "./basketItem";
 import Brand from "./brandModel";
+import Review from "./reviewModel";
+import Rating from "./ratingModel";
 
 @Table({tableName: 'device'})
 export default class Device extends Model {
-    @PrimaryKey
+    @AllowNull(false)
+    @Column(DataType.STRING)
+    name!: string
+
+    @AllowNull(false)
     @Column(DataType.INTEGER)
-    id: number | any;
+    price!: number
+
+    @Default(0)
+    @Column(DataType.DOUBLE)
+    rating!: number
 
     @Column(DataType.STRING)
-    name: string | any;
-
-    @Column(DataType.INTEGER)
-    price: number | any;
-
-    @Column(DataType.STRING)
-    img: string | any;
-
-    @ForeignKey(() => Review)
-    review_id: number | any
-
-    @ForeignKey(() => Rating)
-    rating_id: number | any
-
-    @ForeignKey(() => Type)
-    type_id: number | any
-
-    @ForeignKey(() => Brand)
-    brand_id: number | any
-
-    @BelongsTo(() => Review)
-    review: Review | any
-
-    @BelongsTo(() => Rating)
-    rating: Rating | any
+    img!: string
 
     @BelongsTo(() => Type)
-    type: Type | any
+    type!: Type
+
+    @ForeignKey(() => Type)
+    typeId!: number
 
     @BelongsTo(() => Brand)
-    brand: Brand | any
+    brand!: Brand
+
+    @ForeignKey(() => Brand)
+    brandId!: number
+
+    @HasMany(() => BasketItem)
+    basketItems!: BasketItem[]
+
+    @HasMany(() => Review)
+    reviews!: Review[]
+
+    @HasMany(() => Rating)
+    ratings!: Rating[]
 }

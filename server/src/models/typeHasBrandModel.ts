@@ -1,23 +1,22 @@
-import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
-import Brand from "./brandModel";
+import {BelongsTo, Column, DataType, ForeignKey, Model, PrimaryKey, Table} from "sequelize-typescript";
 import Type from "./typeModel";
+import Brand from "./brandModel";
 
 @Table({tableName: 'type_has_brand'})
 export default class TypeHasBrand extends Model {
     @BelongsTo(() => Type)
-    type: Type | any
+    type!: Type
 
     @ForeignKey(() => Type)
     @PrimaryKey
     @Column(DataType.INTEGER)
-    type_id: number | any
+    typeId!: number
 
     @BelongsTo(() => Brand)
-    brand: Brand | any
+    brand!: Brand
 
     @ForeignKey(() => Brand)
     @PrimaryKey
     @Column(DataType.INTEGER)
-    brand_id: number | any
-
+    brandId!: number
 }
