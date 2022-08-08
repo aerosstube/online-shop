@@ -1,4 +1,4 @@
-import {Table, Model, Column, Default, Unique, AllowNull, HasOne, HasMany} from "sequelize-typescript";
+import {Table, Model, Column,   Default, Unique, AllowNull, HasOne, HasMany} from "sequelize-typescript";
 import {DataType} from "sequelize-typescript";
 import Token from "./tokenModel";
 import Review from "./reviewModel";
@@ -11,6 +11,7 @@ export default class User extends Model {
     @Column(DataType.STRING)
     email!: string
 
+    @Unique(true)
     @AllowNull(false)
     @Column(DataType.STRING)
     login!: string
@@ -26,6 +27,10 @@ export default class User extends Model {
     @Default(false)
     @Column(DataType.BOOLEAN)
     isActive!: boolean
+
+    @AllowNull(false)
+    @Column(DataType.STRING)
+    activationLink!: string
 
     @AllowNull(false)
     @Column(DataType.STRING)

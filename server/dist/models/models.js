@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const { DataTypes } = require('sequelize');
 const sequelize_typescript_1 = require("sequelize-typescript");
-const img = require('../../img/1303507907_User_Green.png');
+const img = require('../../src/img/standartUserImg.png');
 let User = class User extends sequelize_typescript_1.Model {
 };
 __decorate([
